@@ -8,4 +8,6 @@
 #### 参考资料
 
 1. 理论习题 [Gradescope](https://www.gradescope.com/courses/33660 "Markdown")
-2. [课程 note](https://zhuanlan.zhihu.com/p/61895500 "Markdown")
+   课程 note 由知乎好心用户经过教授授权后翻译
+2. [课程 note-1](https://zhuanlan.zhihu.com/p/61895500 "Markdown")
+3. [课程 note-2](https://zhuanlan.zhihu.com/p/64368643 "Markdown")
