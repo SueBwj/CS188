@@ -1,6 +1,7 @@
 # 2022 级中山大学人工智能学院 人工智能原理实验课作业
 
 授课老师：[彭振辉](https://zhenhuipeng.com/ "Markdown")
+
 参考 CS188 UCBerkeley [Fall2018](https://inst.eecs.berkeley.edu/~cs188/fa18/index.html "Markdown") 课程内容
 
 ---
