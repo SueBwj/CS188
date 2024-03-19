@@ -14,7 +14,15 @@
 
 1. [课程 note-1](https://zhuanlan.zhihu.com/p/61895500 "Markdown")
 2. [课程 note-2](https://zhuanlan.zhihu.com/p/64368643 "Markdown")
+3. [课程 note-3](https://zhuanlan.zhihu.com/p/148256240 "Markdown")
+   1. [alpha-beta 详细推导和讲解](https://blog.csdn.net/weixin_42165981/article/details/103263211 "Markdown")
+4. [课程 note-4](https://zhuanlan.zhihu.com/p/272652797 "Markdown")
 
 ###### 上课课件
 
 所有课程课件存储在课件文件夹中
+
+###### 其他参考资料
+
+1. [UCB 算法](https://zhuanlan.zhihu.com/p/589652397 "Markdown")
+2. [UCB 案例+代码](https://zhuanlan.zhihu.com/p/32356077 "Markdown")
