@@ -26,6 +26,8 @@
 1. [UCB 算法](https://zhuanlan.zhihu.com/p/589652397 "Markdown")
 2. [UCB 案例+代码](https://zhuanlan.zhihu.com/p/32356077 "Markdown")
 3. [alpha-beta 详细推导和讲解](https://blog.csdn.net/weixin_42165981/article/details/103263211 "Markdown")
+4. [MDP: Value Iteration](https://zhuanlan.zhihu.com/p/33229439 "Markdown")
 
 ###### 个人资料
-1. 
+
+1. [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
