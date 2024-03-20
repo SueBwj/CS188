@@ -14,9 +14,10 @@
 
 # imports from python standard library
 import grading
-import imp
+import importlib.util
 import optparse
 import os
+import pprint
 import re
 import sys
 import projectParams
@@ -134,12 +135,12 @@ def loadModuleString(moduleSource):
     return tmp
 
 
-import py_compile
-
-
 def loadModuleFile(moduleName, filePath):
-    with open(filePath, 'r') as f:
-        return imp.load_module(moduleName, f, "%s.py" % moduleName, (".py", "r", imp.PY_SOURCE))
+    # https://docs.python.org/3/library/importlib.html#importing-a-source-file-directly
+    spec = importlib.util.spec_from_file_location(moduleName, filePath)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
 
 
 def readFile(path, root=""):
@@ -176,8 +177,6 @@ ERROR_HINT_MAP = {
     """
     }
 }
-
-import pprint
 
 
 def splitStrings(d):
@@ -343,12 +342,6 @@ if __name__ == '__main__':
     if options.generateSolutions:
         confirmGenerate()
     codePaths = options.studentCode.split(',')
-    # moduleCodeDict = {}
-    # for cp in codePaths:
-    #     moduleName = re.match('.*?([^/]*)\.py', cp).group(1)
-    #     moduleCodeDict[moduleName] = readFile(cp, root=options.codeRoot)
-    # moduleCodeDict['projectTestClasses'] = readFile(options.testCaseCode, root=options.codeRoot)
-    # moduleDict = loadModuleDict(moduleCodeDict)
 
     moduleDict = {}
     for cp in codePaths:

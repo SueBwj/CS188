@@ -17,6 +17,7 @@ from game import Directions
 import random, util
 
 from game import Agent
+from pacman import GameState
 
 class ReflexAgent(Agent):
     """
@@ -29,7 +30,7 @@ class ReflexAgent(Agent):
     """
 
 
-    def getAction(self, gameState):
+    def getAction(self, gameState: GameState):
         """
         You do not need to change this method, but you're welcome to.
 
@@ -51,7 +52,7 @@ class ReflexAgent(Agent):
 
         return legalMoves[chosenIndex]
 
-    def evaluationFunction(self, currentGameState, action):
+    def evaluationFunction(self, currentGameState: GameState, action):
         """
         Design a better evaluation function here.
 
@@ -74,9 +75,32 @@ class ReflexAgent(Agent):
         newScaredTimes = [ghostState.scaredTimer for ghostState in newGhostStates]
 
         "*** YOUR CODE HERE ***"
+        # # getPacmanState可以返回pacman的状态，有两个function：getDirection和getPosition可以调用
+            # print(f"successor state:\n {successorGameState.getPacmanState().getDirection()}")
+            # print(f"newPos: {newPos}")
+        # # newFood.aslist()返回一个食物地址列表
+            # print(f"newFood: {newFood.asList()}")
+        # # newGhostStates是一个列表，列表中是每一个ghost的state
+            # print(f"newGhostStates: {newGhostStates}")
+        # # newScaredTime是一个列表，返回每一个ghost的scared time
+             # print(f"newScaredTime: {newScaredTimes}")
+            
+        if(successorGameState.getNumFood() != 0):
+            
+            # 距离最近食物距离
+            foodDistance = min([util.manhattanDistance(newPos,newFood.asList()[i]) for i in range(len(newFood.asList()))])
+            
+            # 距离所有没有被scared的ghost的最小距离
+            # 每一个ghost的newPos
+            newGhostPosList = [newGhostStates[i].getPosition() for i in range(len(newGhostStates))]
+            # 计算离ghost的距离，如果ghost没有被scare则取最小的距离，这个最小的距离越大越好，如果被scared就直接取100
+            ghostDistance = min([util.manhattanDistance(newPos,newGhostPosList[i]) for i in range(len(newGhostPosList)) if newScaredTimes[i] == 0] or [100])
+            
+            return successorGameState.getScore() + 1.0 / foodDistance + 0.02 * ghostDistance
+    
         return successorGameState.getScore()
 
-def scoreEvaluationFunction(currentGameState):
+def scoreEvaluationFunction(currentGameState: GameState):
     """
     This default evaluation function just returns the score of the state.
     The score is the same one displayed in the Pacman GUI.
@@ -111,7 +135,7 @@ class MinimaxAgent(MultiAgentSearchAgent):
     Your minimax agent (question 2)
     """
 
-    def getAction(self, gameState):
+    def getAction(self, gameState: GameState):
         """
         Returns the minimax action from the current gameState using self.depth
         and self.evaluationFunction.
@@ -142,7 +166,7 @@ class AlphaBetaAgent(MultiAgentSearchAgent):
     Your minimax agent with alpha-beta pruning (question 3)
     """
 
-    def getAction(self, gameState):
+    def getAction(self, gameState: GameState):
         """
         Returns the minimax action using self.depth and self.evaluationFunction
         """
@@ -154,7 +178,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
       Your expectimax agent (question 4)
     """
 
-    def getAction(self, gameState):
+    def getAction(self, gameState: GameState):
         """
         Returns the expectimax action using self.depth and self.evaluationFunction
 
@@ -164,7 +188,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         "*** YOUR CODE HERE ***"
         util.raiseNotDefined()
 
-def betterEvaluationFunction(currentGameState):
+def betterEvaluationFunction(currentGameState: GameState):
     """
     Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
     evaluation function (question 5).
