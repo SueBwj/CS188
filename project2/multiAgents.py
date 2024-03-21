@@ -301,7 +301,64 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
     """
       Your expectimax agent (question 4)
     """
+    def Minimax(self,gameState, agentIndex,depth):
+        """
+        该函数返回agent根据miniMax策略获得的值,和返回所采取的action
+        params:
+            gameState:当前状态
+            agentIndex:0为pacman,>=1为ghost
+            depth:当前递归深度
+        """
+        if gameState.isWin() or gameState.isLose() or depth == 0:
+            res = self.evaluationFunction(gameState), Directions.STOP
+        
+        elif agentIndex == 0: 
+            res = self.Maxmize(gameState,agentIndex,depth)
+        else:
+            res = self.Expectimax(gameState,agentIndex,depth)
 
+        return res
+    
+    def Maxmize(self,gameState,agentIndex,depth): 
+        if agentIndex != gameState.getNumAgents()-1:
+            nextAgentIndex = agentIndex + 1
+            # agent之间交替做决策算是一层，depth不需要+1
+            nextDepth = depth
+        if agentIndex == gameState.getNumAgents()-1:
+            nextAgentIndex = 0
+            # 去到下一层
+            nextDepth = depth - 1
+        v = -1e9
+        bestAction = Directions.STOP
+        pacmanActions = gameState.getLegalActions(agentIndex)
+        for action in pacmanActions:
+            Nextvalue = self.Minimax(gameState.generateSuccessor(agentIndex,action),nextAgentIndex, nextDepth)[0]
+            if v < Nextvalue:
+                v = Nextvalue
+                bestAction = action
+                
+        return v, bestAction
+        
+
+    def Expectimax(self,gameState,agentIndex,depth):
+        if agentIndex != gameState.getNumAgents()-1:
+            nextAgentIndex = agentIndex + 1
+            nextDepth = depth
+        if agentIndex == gameState.getNumAgents()-1:
+            nextAgentIndex = 0
+            nextDepth = depth - 1
+        v = 0
+        bestAction = Directions.STOP
+        ghostActions = gameState.getLegalActions(agentIndex)
+        probability = 1 / len(ghostActions)
+        for action in ghostActions:
+            Nextvalue = self.Minimax(gameState.generateSuccessor(agentIndex,action),nextAgentIndex, nextDepth)[0]
+            v += probability * Nextvalue
+        
+        bestAction = random.choice(ghostActions)
+                
+        return v, bestAction
+    
     def getAction(self, gameState: GameState):
         """
         Returns the expectimax action using self.depth and self.evaluationFunction
@@ -310,6 +367,7 @@ class ExpectimaxAgent(MultiAgentSearchAgent):
         legal moves.
         """
         "*** YOUR CODE HERE ***"
+        return self.Minimax(gameState,0,self.depth)[1]
         util.raiseNotDefined()
 
 def betterEvaluationFunction(currentGameState: GameState):
