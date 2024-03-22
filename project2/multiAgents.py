@@ -378,6 +378,18 @@ def betterEvaluationFunction(currentGameState: GameState):
     DESCRIPTION: <write something here so we know what you did>
     """
     "*** YOUR CODE HERE ***"
+    pacmanPos = currentGameState.getPacmanPosition()
+    # ghostPos是一个列表，存储着所有ghost的坐标
+    ghostPos = currentGameState.getGhostPositions()
+    foodPos = currentGameState.getFood().asList()
+    # 距离最近食物距离
+    foodDistance = 0.001
+    if not currentGameState.isWin():
+        foodDistance = min([util.manhattanDistance(pacmanPos,foodPos[i]) for i in range(len(foodPos))])
+    # 计算离ghost的距离,这个最小的距离越大越好
+    ghostDistance = min([util.manhattanDistance(pacmanPos,ghostPos[i]) for i in range(len(ghostPos))])
+    return 10.0 / foodDistance + 0.1 * ghostDistance + currentGameState.getScore()
+    
     util.raiseNotDefined()
 
 # Abbreviation
