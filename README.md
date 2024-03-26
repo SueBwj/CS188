@@ -31,4 +31,5 @@
 ###### 个人资料
 
 1. [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
-2. [Exploration and Exploitation]()
+2. note10 - [Exploration and Exploitation](https://github.com/SueBwj/CS188/blob/main/Exploration%20and%20Exploitation.pdf "Markdown")
+3. note11 - [Reinforcement Learning](https://github.com/SueBwj/CS188/blob/main/Reinforcement%20Learning.pdf "Markdown")
