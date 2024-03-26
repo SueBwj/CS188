@@ -31,3 +31,4 @@
 ###### 个人资料
 
 1. [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
+2. [Exploration and Exploitation]()
