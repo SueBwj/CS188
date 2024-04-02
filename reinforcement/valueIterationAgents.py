@@ -62,6 +62,35 @@ class ValueIterationAgent(ValueEstimationAgent):
     def runValueIteration(self):
         # Write value iteration code here
         "*** YOUR CODE HERE ***"
+        # 迭代self.iterations次
+        
+        for _ in range(self.iterations):
+            # print(self.mdp.getStates())
+            Vtable = util.Counter()
+            for state in self.mdp.getStates()[1:]:
+                # print(state)
+                ActionsList= self.mdp.getPossibleActions(state)
+                AnsList = []
+                for action in ActionsList:
+                    nextStatesAndProbs = self.mdp.getTransitionStatesAndProbs(state,action)
+                    # print(f'action: {action}')
+                    # print(nextStatesAndProbs)
+                    # 不根据概率分布来挑选洗一个可能的state，而是求加权平均
+                    ans = 0.0
+                    for item in nextStatesAndProbs:
+                        statePrime, prob = item
+                        reward = self.mdp.getReward(state,action,statePrime)
+                        # 套用公式计算当前state的value
+                        ans += prob * (reward + self.discount * self.values[statePrime])
+                        # print(f'ans:{ans}')
+                        
+                    AnsList.append(ans)
+                Vtable[state] = max(AnsList)
+                # print(f'state: {state}, AnsList: {AnsList}')
+                # print(f'self.values[state]: {self.values[state]}')
+            self.values = Vtable
+                    
+                    
 
 
     def getValue(self, state):
@@ -77,7 +106,15 @@ class ValueIterationAgent(ValueEstimationAgent):
           value function stored in self.values.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        nextStatesAndProbs = self.mdp.getTransitionStatesAndProbs(state,action)
+        qvalue = 0
+        for item in nextStatesAndProbs:
+            statePrime, prob = item
+            reward = self.mdp.getReward(state,action,statePrime)
+            qvalue += prob * (reward + self.discount * self.values[statePrime])
+        return qvalue            
+        
+        # util.raiseNotDefined()
 
     def computeActionFromValues(self, state):
         """
@@ -89,6 +126,12 @@ class ValueIterationAgent(ValueEstimationAgent):
           terminal state, you should return None.
         """
         "*** YOUR CODE HERE ***"
+        policy = util.Counter()
+        for action in self.mdp.getPossibleActions(state):
+            policy[action] = self.getQValue(state,action)
+        
+        return policy.argMax()
+            
         util.raiseNotDefined()
 
     def getPolicy(self, state):
