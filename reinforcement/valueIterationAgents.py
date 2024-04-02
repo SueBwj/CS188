@@ -66,6 +66,7 @@ class ValueIterationAgent(ValueEstimationAgent):
         
         for _ in range(self.iterations):
             # print(self.mdp.getStates())
+            # 这里建立一个新的table避免就地更新：也就是直接更新self.values的值；因为更新后的值会影响其他位置的计算；两种方式都可以收敛到正确值，并且就地更新的速度更快
             Vtable = util.Counter()
             for state in self.mdp.getStates()[1:]:
                 # print(state)
