@@ -20,8 +20,10 @@
 # value iteration.
 
 def question2():
+    #  降低noisy
+    # 噪音参数代表agent执行动作时，意外进入不良状态的概率，如果噪音过高，agent会更加谨慎，选择不穿过桥避免掉下悬崖
     answerDiscount = 0.9
-    answerNoise = 0.2
+    answerNoise = 0.01
     return answerDiscount, answerNoise
 
 def question3a():
