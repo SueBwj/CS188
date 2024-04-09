@@ -33,3 +33,4 @@
 1. [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
 2. note10 - [Exploration and Exploitation](https://github.com/SueBwj/CS188/blob/main/Exploration%20and%20Exploitation.pdf "Markdown")
 3. note11 - [Reinforcement Learning](https://github.com/SueBwj/CS188/blob/main/Reinforcement%20Learning.pdf "Markdown")
+4. 关于 project3 task4 中 [Prioritized Sweeping Value Iteration](https://github.com/SueBwj/CS188/blob/main/reinforcement/NIPS-1992-memory-based-reinforcement-learning-efficient-computation-with-prioritized-sweeping-Paper.pdf "Markdown") 算法的介绍
