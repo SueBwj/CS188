@@ -165,4 +165,40 @@ class PrioritizedSweepingValueIterationAgent(ValueIterationAgent):
 
     def runValueIteration(self):
         "*** YOUR CODE HERE ***"
-
+        # 计算predecessor
+        predecessors = {}
+        for state in self.mdp.getStates():
+            ActionsList= self.mdp.getPossibleActions(state)
+            for action in ActionsList:
+                nextStatesAndProbs = self.mdp.getTransitionStatesAndProbs(state,action)
+                for item in nextStatesAndProbs:
+                    nextState, _ = item
+                    if nextState in predecessors:
+                        predecessors[nextState].add(state)
+                    else:
+                        predecessors[nextState] = {state}              
+        #初始化一个优先队列 
+        PQueue = util.PriorityQueue()
+        for state in self.mdp.getStates()[1:]:
+            bestAction = self.getPolicy(state)
+            maxQvalue = self.getQValue(state,bestAction)
+            diff = abs(self.values[state] - maxQvalue)
+            # print(f'diff is : {diff}')
+            PQueue.update(state,-diff)
+        
+        for _ in range(self.iterations):
+            if PQueue.isEmpty():
+                break
+            state = PQueue.pop()
+            bestAction = self.getPolicy(state)
+            # value值就等于最大的qvalue值
+            stateValue = self.getQValue(state,bestAction)
+            self.values[state] = stateValue
+            # print(f'self.values:{self.values[state]}')
+            for p in predecessors[state]:
+                bestAction = self.getPolicy(p)
+                maxQvalue = self.getQValue(p,bestAction)
+                diff = abs(self.values[p] - maxQvalue)
+                # print(f'diff is : {diff}')
+                if diff > self.theta:
+                    PQueue.update(p,-diff)
