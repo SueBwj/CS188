@@ -63,7 +63,7 @@
 
 1.  note10 - [Exploration and Exploitation](https://github.com/SueBwj/CS188/blob/main/Exploration%20and%20Exploitation.pdf "Markdown")
 2.  note11 - [Reinforcement Learning](https://github.com/SueBwj/CS188/blob/main/Reinforcement%20Learning.pdf "Markdown")
-3.  [model-based ADP learner with code implementation]("https://medium.com/@ngao7/reinforcement-learning-model-based-adp-learner-with-code-implementation-6ad73867fb1e" "Markdown")
+3.  [model-based ADP learner with code implementation](https://medium.com/@ngao7/reinforcement-learning-model-based-adp-learner-with-code-implementation-6ad73867fb1e "Markdown")
 4.  [Model-free MC learner with code implementation](https://medium.com/@ngao7/reinforcement-learning-model-free-mc-learner-with-code-implementation-f9f475296dcb "Markdown") -- Monte Carlo 蒙特卡洛
 5.  [Reinforcement learning: concepts of Q-learning](https://medium.com/@ngao7/reinforcement-learning-concepts-of-q-learning-22f2659525fd "Markdown")
 6.  [Reinforcement learning: Q-learner with detailed example and code implementation](https://medium.com/@ngao7/reinforcement-learning-q-learner-with-detailed-example-and-code-implementation-f7578976473c#8db0 "Markdown")
