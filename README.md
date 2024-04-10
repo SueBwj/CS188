@@ -51,8 +51,10 @@
 1.  [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
 2.  [Markov decision process](https://medium.com/@ngao7/markov-decision-process-basics-3da5144d3348 "Markdown") MDP 基础概念介绍和代码示例
 3.  [MDP: Value Iteration](https://zhuanlan.zhihu.com/p/33229439 "Markdown")
-4.  [MDP: policy iteration with code implementation](https://medium.com/@ngao7/markov-decision-process-policy-iteration-42d35ee87c82 "Markdown")
-5.  关于 project3 task4 中 [Prioritized Sweeping Value Iteration](https://github.com/SueBwj/CS188/blob/main/reinforcement/NIPS-1992-memory-based-reinforcement-learning-efficient-computation-with-prioritized-sweeping-Paper.pdf "Markdown") 算法的介绍
+4.  [MDP: Value Iteration with code implementation](https://medium.com/@ngao7/markov-decision-process-value-iteration-2d161d50a6ff "Markdown")
+5.  [MDP: policy iteration with code implementation](https://medium.com/@ngao7/markov-decision-process-policy-iteration-42d35ee87c82 "Markdown")
+
+6.  关于 project3 task4 中 [Prioritized Sweeping Value Iteration](https://github.com/SueBwj/CS188/blob/main/reinforcement/NIPS-1992-memory-based-reinforcement-learning-efficient-computation-with-prioritized-sweeping-Paper.pdf "Markdown") 算法的介绍
 
 </details>
 
@@ -61,5 +63,9 @@
 
 1.  note10 - [Exploration and Exploitation](https://github.com/SueBwj/CS188/blob/main/Exploration%20and%20Exploitation.pdf "Markdown")
 2.  note11 - [Reinforcement Learning](https://github.com/SueBwj/CS188/blob/main/Reinforcement%20Learning.pdf "Markdown")
+3.  [model-based ADP learner with code implementation]("https://medium.com/@ngao7/reinforcement-learning-model-based-adp-learner-with-code-implementation-6ad73867fb1e" "Markdown")
+4.  [Model-free MC learner with code implementation](https://medium.com/@ngao7/reinforcement-learning-model-free-mc-learner-with-code-implementation-f9f475296dcb "Markdown") -- Monte Carlo 蒙特卡洛
+5.  [Reinforcement learning: concepts of Q-learning](https://medium.com/@ngao7/reinforcement-learning-concepts-of-q-learning-22f2659525fd "Markdown")
+6.  [Reinforcement learning: Q-learner with detailed example and code implementation](https://medium.com/@ngao7/reinforcement-learning-q-learner-with-detailed-example-and-code-implementation-f7578976473c#8db0 "Markdown")
 
 </details>
