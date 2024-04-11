@@ -53,7 +53,8 @@ class QLearningAgent(ReinforcementAgent):
           or the Q node value otherwise
         """
         "*** YOUR CODE HERE ***"
-        return self.Qtable[(state,action)]
+        # 注意这里需要使用float
+        return float(self.Qtable[(state,action)])
         util.raiseNotDefined()
 
 
@@ -68,14 +69,23 @@ class QLearningAgent(ReinforcementAgent):
         actionList = self.getLegalActions(state)
         # 不是terminal state
         if len(actionList) != 0:
-          qvalue = []
+          maxQvalue = -1e9
           for action in actionList:
-            if (state, action) not in self.Qtable:
-              self.Qtable[(state,action)] = 0.0
-            qvalue.append(self.Qtable[(state,action)])
-          return max(qvalue)
+            if maxQvalue < self.getQValue(state,action):
+              maxQvalue = self.getQValue(state,action)
+          return maxQvalue
         else:
           return 0.0
+        # actions = self.getLegalActions(state)
+        # if not actions:
+        #     return 0.0
+        # best_action, best_reward = '', -1e9
+        # for action in actions:
+        #     reward = self.getQValue(state, action)
+        #     if reward > best_reward:
+        #         best_reward = reward
+        #         best_action = action
+        # return best_reward
         util.raiseNotDefined()
 
     def computeActionFromQValues(self, state):
@@ -90,8 +100,6 @@ class QLearningAgent(ReinforcementAgent):
           bestAction = None
           maxQvalue = -1e9 #注意这里将maxQvalue设置为0.0则无法通过
           for action in actionList:
-            if (state, action) not in self.Qtable:
-              self.Qtable[(state,action)] = 0.0
             if maxQvalue < self.Qtable[(state,action)]:
               # print(self.Qtable[(state,action)])
               maxQvalue = self.Qtable[(state,action)]
@@ -135,6 +143,7 @@ class QLearningAgent(ReinforcementAgent):
         """
         "*** YOUR CODE HERE ***"
         self.Qtable[(state,action)] = self.Qtable[(state,action)] + self.alpha * (reward + self.discount * self.computeValueFromQValues(nextState) - self.Qtable[(state,action)])
+        print(f'Qtable[(state,action)]={self.Qtable[(state,action)]}')
         # util.raiseNotDefined()
 
     def getPolicy(self, state):
@@ -198,6 +207,14 @@ class ApproximateQAgent(PacmanQAgent):
           where * is the dotProduct operator
         """
         "*** YOUR CODE HERE ***"
+        # print(self.getWeights())
+        # print(self.featExtractor.getFeatures(state,action))
+        features = self.featExtractor.getFeatures(state,action)
+        value = 0.0
+        for indicator in features:
+          # print(indicator, self.weights[indicator],features[indicator])
+          value += self.weights[indicator] * features[indicator]
+        return value
         util.raiseNotDefined()
 
     def update(self, state, action, nextState, reward):
@@ -205,7 +222,13 @@ class ApproximateQAgent(PacmanQAgent):
            Should update your weights based on transition
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        diff = reward + self.discount * self.getValue(nextState) - self.getQValue(state,action=action)
+        features = self.featExtractor.getFeatures(state,action)
+        for indicator in features:
+          # print(self.weights[indicator])
+          self.weights[indicator] += self.alpha * diff *  features[indicator]
+        return 
+        # util.raiseNotDefined()
 
     def final(self, state):
         "Called at the end of each game."
