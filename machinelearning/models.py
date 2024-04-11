@@ -71,6 +71,19 @@ class RegressionModel(object):
     def __init__(self):
         # Initialize your model parameters here
         "*** YOUR CODE HERE ***"
+        self.learning_rate = 0.01
+        # First Layers
+        self.m1 = nn.Parameter(1,64)
+        self.b1 = nn.Parameter(1,64)
+        
+        # Second Layers
+        self.m2 = nn.Parameter(64,32)
+        self.b2 = nn.Parameter(1,32)
+        
+        # Output Layers
+        self.m3 = nn.Parameter(32,1)
+        self.b3 = nn.Parameter(1,1)
+        self.param = [self.m1, self.b1, self.m2, self.b2, self.m3, self.b3]
 
     def run(self, x):
         """
@@ -82,6 +95,14 @@ class RegressionModel(object):
             A node with shape (batch_size x 1) containing predicted y-values
         """
         "*** YOUR CODE HERE ***"
+        first_layer = nn.ReLU(nn.AddBias(nn.Linear(x,self.m1),self.b1))
+        
+        second_layer = nn.ReLU(nn.AddBias(nn.Linear(first_layer,self.m2),self.b2))
+        
+        output_layer = nn.AddBias(nn.Linear(second_layer,self.m3),self.b3)
+
+        return output_layer
+        
 
     def get_loss(self, x, y):
         """
@@ -94,12 +115,24 @@ class RegressionModel(object):
         Returns: a loss node
         """
         "*** YOUR CODE HERE ***"
+        predicted_y = self.run(x)
+        loss = nn.SquareLoss(predicted_y,y)
+        return loss
 
     def train(self, dataset):
         """
         Trains the model.
         """
         "*** YOUR CODE HERE ***"
+        batch_size = 50
+        loss = 1e9
+        while loss >= 0.01:
+            for x, y in dataset.iterate_once(batch_size):
+                loss = self.get_loss(x,y)
+                grad = nn.gradients(loss,self.param)
+                for i in range(len(grad)):
+                    self.param[i].update(grad[i],-self.learning_rate)
+                loss = nn.as_scalar(loss)
 
 class DigitClassificationModel(object):
     """
