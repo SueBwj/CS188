@@ -1,4 +1,5 @@
 import nn
+import numpy as np
 
 class PerceptronModel(object):
     def __init__(self, dimensions):
@@ -27,6 +28,7 @@ class PerceptronModel(object):
         Returns: a node containing a single number (the score)
         """
         "*** YOUR CODE HERE ***"
+        return nn.DotProduct(x,self.w)
 
     def get_prediction(self, x):
         """
@@ -35,12 +37,30 @@ class PerceptronModel(object):
         Returns: 1 or -1
         """
         "*** YOUR CODE HERE ***"
+        score = self.run(x)
+        score_float = nn.as_scalar(score)
+        if score_float >= 0:
+            return 1
+        return -1
 
     def train(self, dataset):
         """
         Train the perceptron until convergence.
         """
         "*** YOUR CODE HERE ***"
+        batch_size = 1
+        while True:
+            flag = True
+            for x, y in dataset.iterate_once(batch_size):
+                score = nn.as_scalar(self.run(x))
+                if score * y.data < 0:
+                    weights = self.get_weights()
+                    # 感知机仅通过数据x和标签来更新权重
+                    weights.update(x,nn.as_scalar(y))
+                    flag = False
+                # print(self.get_weights().data)
+            if flag:
+                break
 
 class RegressionModel(object):
     """
