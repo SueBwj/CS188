@@ -151,7 +151,22 @@ class DigitClassificationModel(object):
     def __init__(self):
         # Initialize your model parameters here
         "*** YOUR CODE HERE ***"
-
+        # 第一层参数
+        self.w1 = nn.Parameter(784,256)
+        self.b1 = nn.Parameter(1,256)
+        
+        # 第二层参数
+        self.w2 = nn.Parameter(256,128)
+        self.b2 = nn.Parameter(1,128)
+        
+        # 第三层参数
+        self.w3 = nn.Parameter(128,10)
+        self.b3 = nn.Parameter(1,10)
+        
+        self.param = [self.w1, self.b1, self.w2, self.b2, self.w3, self.b3]
+        
+        self.learning_rate = 0.5
+        
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -167,6 +182,16 @@ class DigitClassificationModel(object):
                 (also called logits)
         """
         "*** YOUR CODE HERE ***"
+        # First_layer
+        first_layer = nn.ReLU(nn.AddBias(nn.Linear(x,self.w1),self.b1))
+        
+        # Second_layer
+        second_layer = nn.ReLU(nn.AddBias(nn.Linear(first_layer,self.w2),self.b2))
+        
+        # Third_layer
+        third_layer = nn.AddBias(nn.Linear(second_layer,self.w3),self.b3)
+        
+        return third_layer
 
     def get_loss(self, x, y):
         """
@@ -182,12 +207,25 @@ class DigitClassificationModel(object):
         Returns: a loss node
         """
         "*** YOUR CODE HERE ***"
+        y_predict = self.run(x)
+        loss = nn.SoftmaxLoss(y_predict,y)
+        return loss
 
     def train(self, dataset):
         """
         Trains the model.
         """
         "*** YOUR CODE HERE ***"
+        batch_size = 100
+        loss = 1e9
+        while loss >= 0.015:
+            for x, y in dataset.iterate_once(batch_size):
+                loss = self.get_loss(x,y)
+                grad = nn.gradients(loss,self.param)
+                for i in range(len(grad)):
+                    self.param[i].update(grad[i],-self.learning_rate)
+                loss = nn.as_scalar(loss)
+            
 
 class LanguageIDModel(object):
     """
