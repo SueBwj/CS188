@@ -52,8 +52,8 @@ class PerceptronModel(object):
         while True:
             flag = True
             for x, y in dataset.iterate_once(batch_size):
-                score = nn.as_scalar(self.run(x))
-                if score * y.data < 0:
+                y_hat = self.get_prediction(x)
+                if y_hat * y.data < 0:
                     weights = self.get_weights()
                     # 感知机仅通过数据x和标签来更新权重
                     weights.update(x,nn.as_scalar(y))
