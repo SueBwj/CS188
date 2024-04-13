@@ -74,8 +74,8 @@
   <summary>Machine Learning</summary>
 
 1. [RNN 详解](https://blog.csdn.net/peaunt1/article/details/126334471 "Markdown")
-2. [Note 21: near Regression and Perceptron](https://github.com/SueBwj/CS188/blob/main/machinelearning/Note%2021.pdf "Markdown")
-3. [Note 22: machinelearning/Logistic Regression and Multi-Class Logistic Regression](https://github.com/SueBwj/CS188/blob/main/machinelearning/Logistic%20Regression%20and%20Multi-Class%20Logistic%20Regression%20Note%2022.pdf "Markdown")
+2. [Note 21: Linear Regression and Perceptron](https://github.com/SueBwj/CS188/blob/main/machinelearning/Note%2021.pdf "Markdown")
+3. [Note 22: Logistic Regression and Multi-Class Logistic Regression](https://github.com/SueBwj/CS188/blob/main/machinelearning/Logistic%20Regression%20and%20Multi-Class%20Logistic%20Regression%20Note%2022.pdf "Markdown")
 4. [Note 23: Optimizer](https://github.com/SueBwj/CS188/blob/main/machinelearning/Optimizer%20Note%2023.pdf "Markdown")
 5. [Note 24: Neural Networks overview](https://github.com/SueBwj/CS188/blob/main/machinelearning/Note%2024.pdf "Markdown")
 </details>
