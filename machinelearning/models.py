@@ -245,6 +245,20 @@ class LanguageIDModel(object):
 
         # Initialize your model parameters here
         "*** YOUR CODE HERE ***"
+        self.initial_wx = nn.Parameter(self.num_chars,256)
+        self.initial_b = nn.Parameter(1,256)
+        
+        self.wx = nn.Parameter(self.num_chars,256)
+        self.xb = nn.Parameter(1,256)
+        self.wh = nn.Parameter(256,256)
+        
+        self.wy = nn.Parameter(256,len(self.languages))
+        self.yb = nn.Parameter(1,len(self.languages))
+        
+        self.param = [self.initial_wx, self.initial_b, self.wx, self.xb, self.wy, self.yb]
+        self.learning_rate = 0.01
+        
+        
 
     def run(self, xs):
         """
@@ -276,7 +290,16 @@ class LanguageIDModel(object):
                 (also called logits)
         """
         "*** YOUR CODE HERE ***"
-
+        h_t = nn.AddBias(nn.Linear(xs[0],self.initial_wx),self.initial_b)
+        for char in xs[1:]:
+            h_t = nn.AddBias(nn.Add(nn.Linear(char,self.wx),nn.Linear(h_t,self.wh)),self.xb)
+            h_t = nn.ReLU(h_t)
+        output = nn.AddBias(nn.Linear(h_t,self.wy),self.yb)
+        
+        return output
+        
+            
+            
     def get_loss(self, xs, y):
         """
         Computes the loss for a batch of examples.
@@ -292,9 +315,22 @@ class LanguageIDModel(object):
         Returns: a loss node
         """
         "*** YOUR CODE HERE ***"
+        y_predict = self.run(xs)
+        loss = nn.SoftmaxLoss(y_predict,y)
+        return loss
 
     def train(self, dataset):
         """
         Trains the model.
         """
         "*** YOUR CODE HERE ***"
+        batch_size = 200
+        accuracy = 0
+        while accuracy < 0.85:
+            for x, y in dataset.iterate_once(batch_size):
+                loss = self.get_loss(x,y)
+                grad = nn.gradients(loss,self.param)
+                for i in range(len(grad)):
+                    self.param[i].update(grad[i],-self.learning_rate)
+                loss = nn.as_scalar(loss)
+            accuracy = dataset.get_validation_accuracy()
