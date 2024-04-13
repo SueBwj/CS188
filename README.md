@@ -69,3 +69,9 @@
 6.  [Reinforcement learning: Q-learner with detailed example and code implementation](https://medium.com/@ngao7/reinforcement-learning-q-learner-with-detailed-example-and-code-implementation-f7578976473c#8db0 "Markdown")
 
 </details>
+
+<details>
+  <summary>Machine Learning</summary>
+
+1. [RNN 详解](https://blog.csdn.net/peaunt1/article/details/126334471 "Markdown")
+</details>
