@@ -31,10 +31,17 @@
 </details>
 
 <details>
+    <summary>Search</summary>
+
+1. [爬山法](https://blog.csdn.net/m0_74766888/article/details/137150994 "Markdown")
+2. [模拟退火](https://zhuanlan.zhihu.com/p/266874840 "Markdown")
+3. [遗传算法](https://zhuanlan.zhihu.com/p/100337680 "Markdown")
+</details>
+<details>
   <summary>UCB</summary>
 
-1. [UCB 算法](https://zhuanlan.zhihu.com/p/589652397 "Markdown")
-2. [UCB 案例+代码](https://zhuanlan.zhihu.com/p/32356077 "Markdown")
+4. [UCB 算法](https://zhuanlan.zhihu.com/p/589652397 "Markdown")
+5. [UCB 案例+代码](https://zhuanlan.zhihu.com/p/32356077 "Markdown")
 
 </details>
 
