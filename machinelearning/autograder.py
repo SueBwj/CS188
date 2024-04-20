@@ -467,7 +467,7 @@ def check_regression(tracker):
     else:
         print("Your final loss ({:f}) must be no more than {:.4f} to receive full points for this question".format(train_loss, loss_threshold))
 
-@test('q3', points=6)
+@test('q3', points=9)
 def check_digit_classification(tracker):
     import models
     model = models.DigitClassificationModel()
@@ -502,7 +502,7 @@ def check_digit_classification(tracker):
             assert not isinstance(node, nn.Parameter) or node in detected_parameters, (
                 "DigitClassificationModel.get_loss() should not use additional parameters not used by DigitClassificationModel.run()")
 
-    tracker.add_points(2) # Partial credit for passing sanity checks
+    tracker.add_points(3) # Partial credit for passing sanity checks
 
     model.train(dataset)
 
@@ -513,11 +513,11 @@ def check_digit_classification(tracker):
     accuracy_threshold = 0.97
     if test_accuracy >= accuracy_threshold:
         print("Your final test set accuracy is: {:%}".format(test_accuracy))
-        tracker.add_points(4)
+        tracker.add_points(6)
     else:
         print("Your final test set accuracy ({:%}) must be at least {:.0%} to receive full points for this question".format(test_accuracy, accuracy_threshold))
 
-@test('q4', points=7)
+@test('q4', points=6)
 def check_lang_id(tracker):
     import models
     model = models.LanguageIDModel()
@@ -571,7 +571,7 @@ def check_lang_id(tracker):
     accuracy_threshold = 0.81
     if test_accuracy >= accuracy_threshold:
         print("Your final test set accuracy is: {:%}".format(test_accuracy))
-        tracker.add_points(5)
+        tracker.add_points(4)
     else:
         print("Your final test set accuracy ({:%}) must be at least {:.0%} to receive full points for this question".format(test_accuracy, accuracy_threshold))
 
