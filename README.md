@@ -53,7 +53,7 @@
 </details>
 
 <details>
-  <summary>MDP</summary>
+  <summary>MDP-markov-decision-process</summary>
 
 1.  [MDP 笔记总结](https://github.com/SueBwj/CS188/blob/main/MDP.pdf "Markdown")
 2.  [Markov decision process](https://medium.com/@ngao7/markov-decision-process-basics-3da5144d3348 "Markdown") MDP 基础概念介绍和代码示例
@@ -85,4 +85,11 @@
 3. [Note 22: Logistic Regression and Multi-Class Logistic Regression](https://github.com/SueBwj/CS188/blob/main/machinelearning/Logistic%20Regression%20and%20Multi-Class%20Logistic%20Regression%20Note%2022.pdf "Markdown")
 4. [Note 23: Optimizer](https://github.com/SueBwj/CS188/blob/main/machinelearning/Optimizer%20Note%2023.pdf "Markdown")
 5. [Note 24: Neural Networks overview](https://github.com/SueBwj/CS188/blob/main/machinelearning/Note%2024.pdf "Markdown")
+</details>
+
+<details>
+  <summary>Bayes Net and HMM</summary>
+
+1. [HMM](https://github.com/SueBwj/CS188/blob/main/HMM.pdf "Markdown")
+2. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
 </details>
