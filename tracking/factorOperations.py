@@ -78,6 +78,10 @@ def joinFactors(factors: List[Factor]):
     Hint: Factor methods that take an assignmentDict as input 
     (such as getProbability and setProbability) can handle 
     assignmentDicts that assign more variables than are in that factor.
+    
+    将 assignmentDict 作为输入 
+    的因子方法(如 getProbability 和 setProbability)可以处理分配的变量多于该因子中的变量的 
+    赋值字典。
 
     Useful functions:
     Factor.getAllPossibleAssignmentDicts
