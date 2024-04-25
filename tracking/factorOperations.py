@@ -116,6 +116,10 @@ def joinFactors(factors: List[Factor]):
         #     print(factor.getProbability(item))
         # print('=====================')
     
+    # 根据题目中的hint，发现unconditioned变量就是每一组factor中unconditioned变量的并集，同理conditioned变量
+    # 变量域同一个字典中的factor都相同，所以直接赋值即可
+    # 1. 取并集获得newFactor的unconditioned和conditioned
+    # 2. 计算newFactor的变量域的概率并赋值
     unconditionedVariable = set()
     conditionedVariable = set()
     inputDomain = dict()
@@ -197,7 +201,28 @@ def eliminateWithCallTracking(callTrackingList=None):
                     "unconditionedVariables: " + str(factor.unconditionedVariables()))
 
         "*** YOUR CODE HERE ***"
-        raiseNotDefined()
+        unconditionedVariable = set()
+        conditionedVariable = set()
+        inputDomain = dict()
+        
+        unconditionedVariable = factor.unconditionedVariables()
+        # print(unconditionedVariable)
+        unconditionedVariable.remove(eliminationVariable)
+        
+        conditionedVariable = factor.conditionedVariables()
+        
+        inputDomain = factor.variableDomainsDict()
+        inputDomain.pop(eliminationVariable)
+        
+        newFactor = Factor(unconditionedVariable,conditionedVariable,inputDomain)
+        
+        factor_assignments = factor.getAllPossibleAssignmentDicts()
+        for factor_assignment in factor_assignments:
+            prob = newFactor.getProbability(factor_assignment)
+            prob += factor.getProbability(factor_assignment)
+            newFactor.setProbability(factor_assignment,prob)
+        
+        return newFactor  
         "*** END YOUR CODE HERE ***"
 
     return eliminate
