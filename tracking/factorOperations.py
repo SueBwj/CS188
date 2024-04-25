@@ -201,6 +201,7 @@ def eliminateWithCallTracking(callTrackingList=None):
                     "unconditionedVariables: " + str(factor.unconditionedVariables()))
 
         "*** YOUR CODE HERE ***"
+        # 思路和上一题一致，只不过计算概率是joint和eliminate的逻辑不同
         unconditionedVariable = set()
         conditionedVariable = set()
         inputDomain = dict()
