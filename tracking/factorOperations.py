@@ -63,7 +63,7 @@ def joinFactors(factors: List[Factor]):
     """
     Input factors is a list of factors.  
     
-    You should calculate the set of unconditioned variables and conditioned 
+    You should calculate the set of unconditioned variables and conditioned (无条件，有条件)
     variables for the join of those factors.
 
     Return a new factor that has those variables and whose probability entries 
@@ -102,7 +102,47 @@ def joinFactors(factors: List[Factor]):
 
 
     "*** YOUR CODE HERE ***"
-    raiseNotDefined()
+    # 构造Factor需要inputUnconditionedVariables, inputConditionedVariables, inputVariableDomainsDict
+    # for factor in factors:
+        # print(factor.getAllPossibleAssignmentDicts())
+        # print(factor.conditionedVariables())
+        # print(factor.unconditionedVariables())
+        # print(factor.variableDomainsDict())
+        # for item in factor.getAllPossibleAssignmentDicts():
+        #     print(factor.getProbability(item))
+        # print('=====================')
+    
+    unconditionedVariable = set()
+    conditionedVariable = set()
+    inputDomain = dict()
+    
+    for factor in factors:
+        
+        inputDomain = factor.variableDomainsDict()
+        
+        for everyUncondition in factor.variableDomainsDict():
+            unconditionedVariable.add(everyUncondition)
+        for everyCondition in factor.conditionedVariables():
+            conditionedVariable.add(everyCondition)
+            
+    # 不用copy会报错
+    for conditioned in conditionedVariable.copy():
+        if conditioned in unconditionedVariable:
+            conditionedVariable.remove(conditioned)
+    
+    newFactor = Factor(unconditionedVariable,conditionedVariable,inputDomain)
+    
+    all_possible_assignments = newFactor.getAllPossibleAssignmentDicts()
+    for assignment in all_possible_assignments:
+        prob = 1.0
+        # 对于每个因子，找到对应赋值的概率并乘以当前的概率
+        for factor in factors:
+            prob *= factor.getProbability(assignment)
+        newFactor.setProbability(assignment, prob)
+    
+    return newFactor      
+    
+
     "*** END YOUR CODE HERE ***"
 
 ########### ########### ###########
