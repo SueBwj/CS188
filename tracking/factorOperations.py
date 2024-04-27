@@ -128,7 +128,7 @@ def joinFactors(factors: List[Factor]):
         
         inputDomain = factor.variableDomainsDict()
         
-        for everyUncondition in factor.variableDomainsDict():
+        for everyUncondition in factor.unconditionedVariables():
             unconditionedVariable.add(everyUncondition)
         for everyCondition in factor.conditionedVariables():
             conditionedVariable.add(everyCondition)
@@ -148,7 +148,7 @@ def joinFactors(factors: List[Factor]):
             prob *= factor.getProbability(assignment)
         newFactor.setProbability(assignment, prob)
     
-    return newFactor      
+    return newFactor         
     
 
     "*** END YOUR CODE HERE ***"
