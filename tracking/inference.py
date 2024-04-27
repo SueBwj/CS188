@@ -237,7 +237,6 @@ def inferenceByVariableEliminationWithCallTracking(callTrackingList=None):
         fullJoint = joinFactors(F)
         queryConditionedOnEvidence = normalize(fullJoint)
         return queryConditionedOnEvidence
-                
         "*** END YOUR CODE HERE ***"
 
     return inferenceByVariableElimination
