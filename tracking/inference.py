@@ -326,8 +326,7 @@ sampleFromFactor = sampleFromFactorRandomSource()
 
 class DiscreteDistribution(dict):
     """
-    A DiscreteDistribution models belief distributions and weight distributions
-    over a finite set of discrete keys.
+    A DiscreteDistribution models belief distributions and weight distributions over a finite set of discrete keys.
     """
 
     def __getitem__(self, key):
@@ -363,8 +362,7 @@ class DiscreteDistribution(dict):
 
     def normalize(self):
         """
-        Normalize the distribution such that the total value of all keys sums
-        to 1. The ratio of values for all keys will remain the same. In the case
+        Normalize the distribution such that the total value of all keys sums to 1. The ratio of values for all keys will remain the same. In the case
         where the total value of the distribution is 0, do nothing.
 
         >>> dist = DiscreteDistribution()
@@ -384,7 +382,10 @@ class DiscreteDistribution(dict):
         {}
         """
         "*** YOUR CODE HERE ***"
-        raiseNotDefined()
+        dist = self.items()
+        sum = dist.total()
+        for key, _ in dist:
+            dist[key] = dist[key]/sum
         "*** END YOUR CODE HERE ***"
 
     def sample(self):
@@ -409,7 +410,15 @@ class DiscreteDistribution(dict):
         0.0
         """
         "*** YOUR CODE HERE ***"
-        raiseNotDefined()
+        self.normalize()
+        randomNumber = random.random()
+        edge1 = 0.0
+        edge2 = 0.0
+        for key, value in self.items():
+            edge2 += value
+            if randomNumber <  edge2 and randomNumber > edge1:
+                return key
+            edge1 = edge2      
         "*** END YOUR CODE HERE ***"
 
 
@@ -471,6 +480,7 @@ class InferenceModule:
         Return a distribution over successor positions of the ghost from the
         given gameState. You must first place the ghost in the gameState, using
         setGhostPosition below.
+        返回ghost去到下一个状态的概率分布
         """
         if index == None:
             index = self.index - 1
@@ -487,7 +497,21 @@ class InferenceModule:
         Return the probability P(noisyDistance | pacmanPosition, ghostPosition).
         """
         "*** YOUR CODE HERE ***"
-        raiseNotDefined()
+        trueDistance = manhattanDistance(pacmanPosition,ghostPosition)
+
+        if noisyDistance is None:
+            if ghostPosition == jailPosition:
+                return 1.0
+            return 0.0
+        
+        else:
+            # 还需要考虑监管sensor观测ghost不在jail，但是实际上在jail的情况
+            if ghostPosition != jailPosition:
+                noisyDistance_tureDistance_prob =  busters.getObservationProbability(noisyDistance, trueDistance)
+                return noisyDistance_tureDistance_prob
+            else:
+                return 0.0
+        
         "*** END YOUR CODE HERE ***"
 
     def setGhostPosition(self, gameState, ghostPosition, index):
