@@ -91,5 +91,6 @@
   <summary>Bayes Net and HMM</summary>
 
 1. [HMM](https://github.com/SueBwj/CS188/blob/main/HMM.pdf "Markdown")
-2. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
+2. [Bayes Net](https://www.jianshu.com/p/28a10aabe74c "Markdown")
+3. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
 </details>
