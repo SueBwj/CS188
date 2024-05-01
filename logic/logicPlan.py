@@ -28,6 +28,7 @@ from logic import PropSymbolExpr, Expr, to_cnf, pycoSAT, parseExpr, pl_true
 
 import itertools
 import copy
+import doctest
 
 pacman_str = 'P'
 food_str = 'FOOD'
@@ -161,9 +162,7 @@ def plTrueInverse(assignments: Dict[Expr, bool], inverse_statement: Expr) -> boo
 
 def atLeastOne(literals: List[Expr]) -> Expr:
     """
-    Given a list of Expr literals (i.e. in the form A or ~A), return a single 
-    Expr instance in CNF (conjunctive normal form) that represents the logic 
-    that at least one of the literals  ist is true.
+    Given a list of Expr literals (i.e. in the form A or ~A), return a single Expr instance in CNF (conjunctive normal form) that represents the logic  that at least one of the literals  ist is true.
     >>> A = PropSymbolExpr('A');
     >>> B = PropSymbolExpr('B');
     >>> symbols = [A, B]
@@ -179,19 +178,23 @@ def atLeastOne(literals: List[Expr]) -> Expr:
     True
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    # disjoin 用或将每一个expression连接起来
+    resExpr = disjoin(literals)
+    return resExpr
     "*** END YOUR CODE HERE ***"
 
 
 def atMostOne(literals: List[Expr]) -> Expr:
     """
     Given a list of Expr literals, return a single Expr instance in 
-    CNF (conjunctive normal form) that represents the logic that at most one of 
-    the expressions in the list is true.
+    CNF (conjunctive normal form) that represents the logic that at most one of the expressions in the list is true.
     itertools.combinations may be useful here.
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    clause = []
+    for (lit1, lit2) in itertools.combinations(literals,2):
+        clause.append(~lit1 | ~lit2)
+    return conjoin(clause)
     "*** END YOUR CODE HERE ***"
 
 
@@ -202,7 +205,9 @@ def exactlyOne(literals: List[Expr]) -> Expr:
     the expressions in the list is true.
     """
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    expr1 = atLeastOne(literals)
+    expr2 = atMostOne(literals)
+    return conjoin(expr1,expr2)
     "*** END YOUR CODE HERE ***"
 
 # ______________________________________________________________________________
@@ -722,3 +727,6 @@ class PlanningProblem:
         a unique goal state such as PositionPlanningProblem
         """
         util.raiseNotDefined()
+
+if __name__ == "__main__":
+    doctest.testmod()
