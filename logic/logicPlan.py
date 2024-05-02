@@ -446,7 +446,6 @@ def positionLogicPlan(problem) -> List:
 # ______________________________________________________________________________
 # QUESTION 5
 
-
 def foodLogicPlan(problem) -> List:
     """
     Given an instance of a FoodPlanningProblem, return a list of actions that help Pacman
@@ -470,7 +469,41 @@ def foodLogicPlan(problem) -> List:
     KB = []
 
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    Food_xy_t = []
+    for x, y in all_coords:
+        Food_xy_t.append(PropSymbolExpr(food_str,x,y,time=0))
+    
+    KB += Food_xy_t
+    KB.append(PropSymbolExpr(pacman_str,x0,y0,time=0))
+
+    for t in range(50):
+        print('t_step: ',t)
+        
+        #  Initial knowledge: Pacman can only be at exactlyOne of the locations in non_wall_coords at timestep 
+        posExpr = []
+        for x_pos, y_pos in non_wall_coords:
+            posExpr.append(PropSymbolExpr(pacman_str,x_pos,y_pos,time=t))
+        KB.append(exactlyOne(posExpr))
+        
+        # Pacman takes exactly one of the four actions in DIRECTIONS at timestep
+        actionExpr = []
+        for action in DIRECTIONS:
+            actionExpr.append(PropSymbolExpr(action,time=t))
+        KB.append(exactlyOne(actionExpr))
+
+
+        for x,y in non_wall_coords:
+            if t != 0:
+                KB.append(pacmanSuccessorAxiomSingle(x,y,t,walls))
+
+        # foodSuccessorAxiom
+        for food_x, food_y in food:
+            KB.append(PropSymbolExpr(food_str, food_x, food_y,time=t+1) % conjoin([PropSymbolExpr(food_str,food_x,food_y,time=t),~PropSymbolExpr(pacman_str,food_x,food_y,time=t)]))
+        # 所有food的位置的下一时刻都为false
+        goal = [~PropSymbolExpr(food_str,food_x,food_y,time=t+1) for food_x, food_y in food]
+        model = findModel(conjoin(KB+goal))
+        if model:
+            return extractActionSequence(model,actions)
     "*** END YOUR CODE HERE ***"
 
 # ______________________________________________________________________________
