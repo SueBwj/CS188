@@ -417,7 +417,30 @@ def positionLogicPlan(problem) -> List:
     KB = []
 
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    KB.append(PropSymbolExpr(pacman_str,x0,y0,time=0))
+    for t in range(50):
+        print('t_step: ',t)
+        
+        #  Initial knowledge: Pacman can only be at exactlyOne of the locations in non_wall_coords at timestep 
+        posExpr = []
+        for x_pos, y_pos in non_wall_coords:
+            posExpr.append(PropSymbolExpr(pacman_str,x_pos,y_pos,time=t))
+        KB.append(exactlyOne(posExpr))
+        
+        # Pacman takes exactly one of the four actions in DIRECTIONS at timestep
+        actionExpr = []
+        for action in DIRECTIONS:
+            actionExpr.append(PropSymbolExpr(action,time=t))
+        KB.append(exactlyOne(actionExpr))
+
+        for x,y in non_wall_coords:
+            if t != 0:
+                KB.append(pacmanSuccessorAxiomSingle(x,y,t,walls_grid))
+        
+        model = findModel(conjoin(KB + [PropSymbolExpr(pacman_str,xg,yg,time=t)]))
+        if model:
+            return extractActionSequence(model,actions)
+                
     "*** END YOUR CODE HERE ***"
 
 # ______________________________________________________________________________
