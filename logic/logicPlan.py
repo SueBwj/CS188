@@ -635,9 +635,38 @@ def slam(problem, agent) -> Generator:
     KB.append(conjoin(outer_wall_sent))
 
     "*** BEGIN YOUR CODE HERE ***"
-    util.raiseNotDefined()
-
+    KB.append(PropSymbolExpr(pacman_str,pac_x_0,pac_y_0,time=0))
+    known_map[pac_x_0][pac_y_0] = 0
+    KB.append(~PropSymbolExpr(wall_str,pac_x_0,pac_y_0))
     for t in range(agent.num_timesteps):
+        KB.append(pacphysicsAxioms(t,all_coords,non_outer_wall_coords,known_map,SLAMSensorAxioms,SLAMSuccessorAxioms))
+        KB.append(PropSymbolExpr(agent.actions[t],time=t))
+        KB.append(numAdjWallsPerceptRules(t,agent.getPercepts()))
+        
+        possible_locations = []
+        for x_pos, y_pos in non_outer_wall_coords:
+            # print('x_pos,y_pos',(x_pos,y_pos))
+            pacman_t = PropSymbolExpr(pacman_str,x_pos,y_pos,time=t)
+            if findModel(conjoin(KB + [pacman_t])):
+                # 将条件加入KB中，如果没有错误，则是possible_locations
+                possible_locations.append((x_pos,y_pos))
+            elif entails(conjoin(KB),pacman_t):
+                # 只有从KB中推导出来的才是actual_location
+                KB.append(pacman_t)
+            elif entails(conjoin(KB),~pacman_t):
+                KB.append(~pacman_t)
+                
+            wall_t = PropSymbolExpr(wall_str,x_pos,y_pos)
+            if findModel(conjoin(KB + [wall_t])):
+                known_map[x_pos][y_pos] = -1
+            if entails(conjoin(KB),wall_t):
+                known_map[x_pos][y_pos] = 1
+                KB.append(wall_t)
+            if entails(conjoin(KB),~wall_t):
+                known_map[x_pos][y_pos] = 0
+                KB.append(~wall_t)
+        
+        agent.moveToNextState(agent.actions[t])
         "*** END YOUR CODE HERE ***"
         yield (known_map, possible_locations)
 

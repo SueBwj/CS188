@@ -91,6 +91,8 @@
   <summary>Bayes Net and HMM</summary>
 
 1. [HMM](https://github.com/SueBwj/CS188/blob/main/HMM.pdf "Markdown")
-2. [Bayes Net](https://www.jianshu.com/p/28a10aabe74c "Markdown")
-3. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
+2. [VE-1: vairable elimination](https://ermongroup.github.io/cs228-notes/inference/ve/ "Markdown") -- 斯坦福大学 cs288note，思路与课件一致，归纳总结的很棒，但更多的是直觉上的阐述
+3. [VE-2: vairable elimination](https://www.jianshu.com/p/28a10aabe74c "Markdown") -- 给出了代码示例和详尽的例子
+4. [判断贝叶斯网络中变量是否独立](https://zhuanlan.zhihu.com/p/436214290 "Markdown")
+5. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
 </details>
