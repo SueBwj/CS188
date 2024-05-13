@@ -3,6 +3,7 @@ from FruitData import FruitData
 from torchvision import transforms
 fruit_classes = os.listdir('./dataset/Training')
 mytransform = transforms.Compose([transforms.ToTensor()])
+print(len(fruit_classes))
 
 root_dir = './dataset/Training'
 training_datasets = None

@@ -1,6 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn import *
+import torch
 
 
 class FruieClassifier(nn.Module):
@@ -14,8 +15,8 @@ class FruieClassifier(nn.Module):
             Conv2d(32, 64, 5, padding=2),
             MaxPool2d(2),
             Flatten(),
-            Linear(1024, 64),
-            Linear(64, 10)
+            Linear(9216, 64),
+            Linear(64, 131)
         )
 
     def forward(self, x):
