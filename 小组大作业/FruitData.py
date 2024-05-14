@@ -4,20 +4,10 @@ import torch
 from PIL import Image
 
 # 定义自己的数据集
-# 将target用数字表示
-fruit_classes_dict = {}
-
-
-def Label2Tensor(fruit_classes_dict):
-    fruit_classes = os.listdir('./dataset/Training')
-    i = 0
-    for fruit_label in fruit_classes:
-        fruit_classes_dict[fruit_label] = torch.tensor(
-            [i], dtype=torch.float32)
-        i += 1
-
-
-Label2Tensor(fruit_classes_dict)
+# 获取水果分类:将目标标签改为整数索引
+fruit_classes = os.listdir('./dataset/Training')
+fruit_classes_dict = {fruit_label: idx for idx,
+                      fruit_label in enumerate(fruit_classes)}
 
 
 class FruitData(Dataset):
@@ -45,8 +35,8 @@ class FruitData(Dataset):
             self.root_dir, self.fruit_class_dir, img_name)
         img = Image.open(img_item_path)
         img = self.transforms(img)
-        fruit_label = self.fruit_classes_dict[self.fruit_class_dir]
-        return img, fruit_label
+        fruit_label_tensor = self.fruit_classes_dict[self.fruit_class_dir]
+        return img, fruit_label_tensor
 
     def __len__(self):
         """
