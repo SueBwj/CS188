@@ -96,3 +96,7 @@
 4. [判断贝叶斯网络中变量是否独立](https://zhuanlan.zhihu.com/p/436214290 "Markdown")
 5. [机器学习-白板推导系列-隐马尔可夫模型](https://www.bilibili.com/video/BV1MW41167Rf?vd_source=65ec8981c0c50f7df1a335cd85471278 "Markdown")
 </details>
+
+
+### 期末重点
+https://adaptable-agenda-988.notion.site/9846c667938a41ca9126b4030d58027b?pvs=74
